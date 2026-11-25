@@ -55,8 +55,11 @@ jobs:
       - name: Export APK
         run: |
           mkdir -p build
-          godot --headless --import || true
-          godot --headless --export-debug "Android" build/perang3d.apk
+          timeout 180 godot --headless --import --quit || true
+          timeout 600 godot --headless --verbose --export-debug "Android" build/perang3d.apk > export.log 2>&1 || true
+          tail -n 60 export.log
+          ls -la build
+          test -f build/perang3d.apk
 
       - uses: actions/upload-artifact@v4
         with:
