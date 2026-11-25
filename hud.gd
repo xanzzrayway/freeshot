@@ -283,7 +283,7 @@ func _draw() -> void:
 	if st == 3:
 		var ac := Global.hud_pos("ammo", s)
 		var wid: String = player.slots[player.cur]
-		var atxt := "RELOAD..." if player.reloading else "%d / INF" % player.ammo[wid]
+		var atxt: String = "RELOAD..." if player.reloading else "%d / INF" % player.ammo[wid]
 		draw_string(font, ac + Vector2(-110, 8) * ks, atxt, HORIZONTAL_ALIGNMENT_CENTER, 220.0 * ks, int(28.0 * ks))
 		if sl > 0:
 			draw_string(font, ac + Vector2(-110, -18) * ks, "SCOPE LV%d" % sl, HORIZONTAL_ALIGNMENT_CENTER, 220.0 * ks, int(20.0 * ks), Color(0.3, 0.9, 1.0))

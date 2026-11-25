@@ -52,10 +52,14 @@ jobs:
           export/android/debug_keystore_user = "androiddebugkey"
           export/android/debug_keystore_pass = "android"
           EOT
+          cp $HOME/.config/godot/editor_settings-$MM.tres $HOME/.config/godot/editor_settings-4.tres
 
       - name: Export APK
         run: |
           mkdir -p build
+          export GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$HOME/debug.keystore
+          export GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey
+          export GODOT_ANDROID_KEYSTORE_DEBUG_PASS=android
           timeout 240 godot --headless --verbose --import > import.log 2>&1 || true
           tail -n 40 import.log
           timeout 600 godot --headless --verbose --export-debug "Android" build/perang3d.apk > export.log 2>&1 || true
